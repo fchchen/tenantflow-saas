@@ -1,0 +1,38 @@
+<mat-card class='panel'>
+  <mat-card-header>
+    <mat-card-title>Platform Admin Portal</mat-card-title>
+    <mat-card-subtitle>Create and inspect tenants across the platform.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)='createTenant()' class='create-form'>
+      <mat-form-field appearance='outline'>
+        <mat-label>Tenant name</mat-label>
+        <input matInput [(ngModel)]='newTenantName' name='name' required />
+      </mat-form-field>
+
+      <mat-form-field appearance='outline'>
+        <mat-label>Tenant slug</mat-label>
+        <input matInput [(ngModel)]='newTenantSlug' name='slug' required />
+      </mat-form-field>
+
+      <button mat-flat-button color='primary'>Create Tenant</button>
+    </form>
+
+    <table class='tenant-table'>
+      <thead>
+        <tr><th>Slug</th><th>Name</th><th>Users</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        @for (tenant of tenants(); track tenant.id) {
+          <tr>
+            <td>{{ tenant.slug }}</td>
+            <td>{{ tenant.name }}</td>
+            <td>{{ tenant.userCount }}</td>
+            <td>{{ tenant.isActive ? 'Active' : 'Disabled' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,52 @@
+<mat-card class="panel">
+  <mat-card-header>
+    <mat-card-title data-testid="login-title">Sign In</mat-card-title>
+    <mat-card-subtitle>Use demo personas or credentials to enter the portals.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="login()" class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          data-testid="email-input"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          data-testid="password-input"
+        />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" [disabled]="loading()" data-testid="login-button">Login</button>
+    </form>
+
+    <div class="demo-actions">
+      <button mat-stroked-button (click)="demoPlatformAdmin()" [disabled]="loading()" data-testid="demo-platform-admin-button">
+        Demo Platform Admin
+      </button>
+      <button mat-stroked-button (click)="demoTenantAdmin()" [disabled]="loading()" data-testid="demo-tenant-admin-button">
+        Demo Tenant Admin
+      </button>
+      <button mat-stroked-button (click)="demoTenantUser()" [disabled]="loading()" data-testid="demo-tenant-user-button">
+        Demo Tenant User
+      </button>
+    </div>
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,87 @@
+<section class='panel'>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Tenant Portal</mat-card-title>
+      <mat-card-subtitle>Tenant-scoped users, feature flags, and quotes.</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <div class='grid'>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Users</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (canManageUsers()) {
+          <form (ngSubmit)='createUser()' class='mini-form'>
+            <mat-form-field appearance='outline'>
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]='email' name='email' required />
+            </mat-form-field>
+
+            <mat-form-field appearance='outline'>
+              <mat-label>Display Name</mat-label>
+              <input matInput [(ngModel)]='displayName' name='displayName' required />
+            </mat-form-field>
+
+            <mat-form-field appearance='outline'>
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]='role' name='role'>
+                <mat-option value='TenantUser'>TenantUser</mat-option>
+                <mat-option value='TenantAdmin'>TenantAdmin</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-flat-button color='primary'>Add User</button>
+          </form>
+        }
+
+        <ul>
+          @for (u of users(); track u.userId) {
+            <li>{{ u.email }} - {{ u.role }}</li>
+          }
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Feature Flags</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul>
+          @for (f of flags(); track f.id) {
+            <li>{{ f.key }}: {{ f.isEnabled ? 'enabled' : 'disabled' }} ({{ f.rolloutPercent }}%)</li>
+          }
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Quotes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)='createQuote()' class='mini-form'>
+          <mat-form-field appearance='outline'>
+            <mat-label>Customer Name</mat-label>
+            <input matInput [(ngModel)]='customerName' name='customerName' required />
+          </mat-form-field>
+
+          <mat-form-field appearance='outline'>
+            <mat-label>Premium</mat-label>
+            <input matInput type='number' min='1' [(ngModel)]='premium' name='premium' required />
+          </mat-form-field>
+
+          <button mat-flat-button color='primary'>Create Quote</button>
+        </form>
+
+        <ul>
+          @for (q of quotes(); track q.id) {
+            <li>{{ q.quoteNumber }} - {{ q.customerName }} - premium {{ q.premium }}</li>
+          }
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+.panel {
+  max-width: 980px;
+}
+
+.create-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  align-items: end;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.tenant-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tenant-table th,
+.tenant-table td {
+  text-align: left;
+  padding: 0.6rem;
+  border-top: 1px solid #e5e7eb;
+}

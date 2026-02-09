@@ -1,0 +1,18 @@
+<div class="shell">
+  <mat-toolbar color="primary" class="topbar">
+    <a class="brand" routerLink="/" data-testid="brand-link">TenantFlow</a>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/admin" data-testid="admin-link">Admin</a>
+    <a mat-button routerLink="/app" data-testid="tenant-link">Tenant</a>
+    @if (!auth.isAuthenticated()) {
+      <a mat-flat-button routerLink="/login" data-testid="login-link">Login</a>
+    }
+    @if (auth.isAuthenticated()) {
+      <button mat-stroked-button (click)="logout()" data-testid="logout-button">Logout</button>
+    }
+  </mat-toolbar>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
